@@ -1,0 +1,17 @@
+{
+  "name": "pi-cal",
+  "version": "1.0.0",
+  "description": "A simple cal for pi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jixun",
+  "license": "MIT",
+  "dependencies": {
+    "clui": "^0.3.1",
+    "ics-parser": "^0.1.5",
+    "moment": "^2.15.1",
+    "underscore": "^1.8.3"
+  }
+}
