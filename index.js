@@ -15,6 +15,8 @@ var ics_data = ics(ics_file);
 
 
 var timeBegin = time.halfHourAgo;
+const regexReminderNameAtFront = /Reminder: (.+?)\s*Today from (\d\d[:.]\d\d)(?:-\d\d:\d\d)? in (.+?)(?:$| taught by)/i;
+const regexReminderNameAtEnd = / at (\d\d:\d\d) in (.+?)(?: - (.+?)(?:$| - ))/i;
 var _ics_data = _.chain(ics_data).filter(event => {
   return event.startDate >= timeBegin;
 }).sortBy(event => event.startDate)
@@ -29,19 +31,19 @@ var _ics_data = _.chain(ics_data).filter(event => {
 
     if (event.name.indexOf('Reminder: ') === 0) {
       let zzz, name, startDate, location;
-      let m_reminder = event.name.match(/ at (\d\d:\d\d) in (.+?)(?: - (.+?)(?:$| - ))/i);
+      let m_reminder = event.name.match(regexReminderNameAtEnd);
       if (m_reminder) {
         let yyy;
         [zzz, startDate, location, name] = m_reminder;
-      } else if ((m_reminder = event.name.match(/Reminder: (.+?)\s*Today from (\d\d[:.]\d\d)(?:-\d\d:\d\d)? in (.+?)(?:$| taught by)/i))) {
+      } else if ((m_reminder = event.name.match(regexReminderNameAtFront))) {
         [zzz, name, startDate, location] = m_reminder;
       } else {
+        console.info('Unsupported reminder message:');
         console.info(JSON.stringify(event));
-        process.exit(0);
+        process.exit(1);
       }
 
       if (m_reminder) {
-
         let [h, m] = startDate.replace('.', ':').split(':').map(d => parseInt(d));
         event.name = 'Event / Talk';
         event.startDate = moment(event.startDate).hour(h).minute(m);
