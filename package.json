@@ -1,8 +1,8 @@
 {
   "name": "pi-cal",
   "version": "1.0.0",
-  "description": "A simple cal for pi",
-  "main": "index.js",
+  "description": "A simple university calendar for rpi",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
