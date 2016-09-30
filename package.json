@@ -12,6 +12,7 @@
     "clui": "^0.3.1",
     "ics-parser": "^0.1.5",
     "moment": "^2.15.1",
+    "request": "^2.75.0",
     "underscore": "^1.8.3"
   }
 }
