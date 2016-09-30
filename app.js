@@ -1,6 +1,7 @@
 global.__base = __dirname + '/';
 global.__src  = __dirname + '/src/';
 
+const config = require('./config.json');
 const ics = require('./ics-parser');
 
 const moment = require('moment');
@@ -18,7 +19,7 @@ const reloadMs = reloadSeconds * 1000;
 // 1. Sync data
 var ics_data = null;
 function syncData () {
-  dataSrc.sync(function (err, data) {
+  dataSrc.sync(config.sync_url, function (err, data) {
     if (err) {
       console.error('Sync Error: ', err);
       process.exit(1);
