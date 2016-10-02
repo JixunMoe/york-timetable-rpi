@@ -46,6 +46,7 @@ module.exports = function (data, waitSeconds) {
         .column(startDate.format('L'))
         .fill()
         .store();
+      newLine(outputBuffer);
     }
 
     let line1 = new Line(outputBuffer)
@@ -67,6 +68,7 @@ module.exports = function (data, waitSeconds) {
     }
 
     line2.fill().store();
+    newLine(outputBuffer);
   });
 
 /*
