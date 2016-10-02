@@ -23,6 +23,9 @@ module.exports = function (data, waitSeconds) {
     height: 'console'
   });
 
+  // fix line missing for kedei led display.
+  newLine(outputBuffer);
+
 /*
   var header = new Line(outputBuffer)
     .column('Name', 20, [clc.cyan])
