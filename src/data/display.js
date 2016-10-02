@@ -37,6 +37,7 @@ module.exports = function (data, waitSeconds) {
   */
 
   let lastDate = null;
+  let now = moment();
   data.forEach(event => {
     let startDate = moment(event.startDate);
     let eventDate = startDate.date();
@@ -54,8 +55,10 @@ module.exports = function (data, waitSeconds) {
       newLine(outputBuffer);
     }
 
+    let style = startDate < now ? [clc.white.strike] : undefined;
+
     let line1 = new Line(outputBuffer)
-      .column(event.name, 20)
+      .column(event.name, 20, style)
       .column(startDate.format('LT'), 7)
       .column(event.location, 20)
       .fill()

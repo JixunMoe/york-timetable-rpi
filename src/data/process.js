@@ -5,7 +5,7 @@ const time = require('../lib/time');
 const moment = require('moment');
 
 module.exports = function (ics_data) {
-  var timeBegin = time.halfHourAgo;
+  var timeBegin = time.fiveMinAgo;
   var _ics_data = _.chain(ics_data).filter(event => {
     return event.startDate >= timeBegin;
   }).sortBy(event => event.startDate)

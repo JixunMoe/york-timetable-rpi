@@ -1,4 +1,5 @@
 const anHour = 3600000;
+const aMin = 60000;
 
 class Days {
   get today() {
@@ -17,6 +18,12 @@ class Days {
   get halfHourAgo() {
     let now = new Date();
     let halfHourAgo = new Date(now - anHour / 2);
+    return halfHourAgo;
+  }
+
+  get fiveMinAgo() {
+    let now = new Date();
+    let halfHourAgo = new Date(now - aMin * 5);
     return halfHourAgo;
   }
 }
