@@ -13,12 +13,16 @@ const dataSrc = require('./src/data');
 const syncMs = 8 * 3600000;
 
 // Reload display every 5 minutes.
-const reloadSeconds = 5 * 60;
+const reloadSeconds = 1 // 5 * 60;
 const reloadMs = reloadSeconds * 1000;
 
+let ics_data = null;
+let processTimer = 0;
+
 // 1. Sync data
-var ics_data = null;
 function syncData () {
+  clearTimeout(processTimer);
+
   dataSrc.sync(config.sync_url, function (err, data) {
     if (err) {
       console.error('Sync Error: ', err);
@@ -27,20 +31,18 @@ function syncData () {
 
     ics_data = ics(data);
     processData(ics_data);
-  });
 
-  clearTimeout(processTimer);
-  setTimeout(syncData, syncMs);
+    setTimeout(syncData, syncMs);
+  });
 }
 
 // 2. Process Data
-let processTimer = 0;
 function processData (ics_data) {
   clearTimeout(processTimer);
   let data = dataSrc.process(ics_data);
   displayData(data);
 
-  processTimer = setTimeout(processData, reloadMs);
+  processTimer = setTimeout(processData, reloadMs, ics_data);
 }
 
 // 3. Display data

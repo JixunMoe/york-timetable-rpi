@@ -15,7 +15,7 @@ module.exports = function (ics_data) {
       if (m_teacher) {
         event.teacher = m_teacher[1].split(', ');
       } else {
-        event.teacher = ['--'];
+        event.teacher = null;
       }
 
       if (event.name.indexOf('Reminder: ') === 0) {
@@ -35,7 +35,7 @@ module.exports = function (ics_data) {
           event.name = 'Event / Talk';
           event.startDate = moment(event.startDate).hour(h).minute(m);
           event.location = location;
-          event.teacher = ["* " + name];
+          event.note = name;
         }
       }
 
