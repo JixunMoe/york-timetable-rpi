@@ -23,6 +23,7 @@ module.exports = function (data, waitSeconds) {
     height: 'console'
   });
 
+/*
   var header = new Line(outputBuffer)
     .column('Name', 20, [clc.cyan])
     .column('Time', 7, [clc.cyan])
@@ -30,7 +31,8 @@ module.exports = function (data, waitSeconds) {
     // .column('Taught by', 40, [clc.cyan])
     .fill()
     .store();
-    
+  */
+
   let lastDate = null;
   data.forEach(event => {
     let startDate = moment(event.startDate);
@@ -39,7 +41,7 @@ module.exports = function (data, waitSeconds) {
     if (lastDate != eventDate) {
       lastDate = eventDate;
       
-      newLine(outputBuffer, lineSeparator);
+      // newLine(outputBuffer, lineSeparator);
       newLine(outputBuffer);
       let lineDate = new Line(outputBuffer)
         .column('Date', 6, [clc.red.bold])
