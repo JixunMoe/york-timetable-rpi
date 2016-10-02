@@ -12,8 +12,8 @@ const dataSrc = require('./src/data');
 // Sync calendar every 8 hours.
 const syncMs = 8 * 3600000;
 
-// Reload display every 5 minutes.
-const reloadSeconds = 1 // 5 * 60;
+// Reload display every 5 seconds.
+const reloadSeconds = 5;
 const reloadMs = reloadSeconds * 1000;
 
 let ics_data = null;
