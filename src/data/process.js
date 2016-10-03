@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const regexReminderNameAtFront = /Reminder: (.+?)\s*Today from (\d\d[:.]\d\d)(?:-\d\d:\d\d)? in (.+?)(?:$| taught by)/i;
 const regexReminderNameAtEnd = / at (\d\d:\d\d) in (.+?)(?: - (.+?)(?:$| - ))/i;
+const regexReminderToday = /^Reminder:\s*(.+?)\s*Today from (\d\d[:.]\d\d)-\d\d[:.]\d\d in (.+)$/i;
 const time = require('../lib/time');
 const moment = require('moment');
 
@@ -26,8 +27,11 @@ module.exports = function (ics_data) {
           [zzz, startDate, location, name] = m_reminder;
         } else if ((m_reminder = event.name.match(regexReminderNameAtFront))) {
           [zzz, name, startDate, location] = m_reminder;
+        } else if ((m_reminder = event.name.match(regexReminderToday))) {
+          [zzz, name, startDate, location] = m_reminder;
         } else {
-          throw new Error('Unsupported reminder message: ' + JSON.stringify(event));
+          // throw new Error('Unsupported reminder message: ' + JSON.stringify(event));
+          event.note = event.name;
         }
 
         if (m_reminder) {
